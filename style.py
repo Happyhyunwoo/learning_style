@@ -10,12 +10,12 @@ st.markdown("""
     <style>
         /* 문항 텍스트 크기 */
         .stRadio > label {
-            font-size: 20px !important;
+            font-size: 40px !important;
         }
 
         /* 라디오 선택지 크기 */
         .stRadio div[role='radiogroup'] label {
-            font-size: 18px !important;
+            font-size: 25px !important;
         }
     </style>
 """, unsafe_allow_html=True)
