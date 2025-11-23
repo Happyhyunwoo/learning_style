@@ -296,7 +296,6 @@ if submitted:
 
 st.sidebar.header("사용 방법")
 st.sidebar.write(
-    "각 문항에 대해 1~4 중 하나를 선택한 후 [결과 보기] 버튼을 눌러 주세요."
-    "결과를 복사해서 문서에 붙여넣기 한 후(MS word, 한글 문서, PDF 등), LearnUs 13주차 과제 게시판에 제출해 주세요"
+    "각 문항에 대해 1~4 중 하나를 선택한 후 [결과 보기] 버튼을 눌러 주세요.\n결과를 복사해서 문서에 붙여넣기 한 후(MS word, 한글 문서, PDF 등), LearnUs 13주차 과제 게시판에 제출해 주세요"
 )
 st.sidebar.write("1 = Never, 2 = Rarely, 3 = Sometimes, 4 = Often")
