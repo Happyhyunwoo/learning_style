@@ -8,14 +8,15 @@ st.set_page_config(
 
 st.markdown("""
     <style>
-        /* 문항 텍스트 크기 */
+        /* 문항 텍스트 (라디오 전체 라벨) */
         .stRadio > label {
-            font-size: 40px !important;
+            font-size: 30px !important;
+            font-weight: 600 !important;
         }
 
-        /* 라디오 선택지 크기 */
+        /* 선택지 숫자 (1, 2, 3, 4) */
         .stRadio div[role='radiogroup'] label {
-            font-size: 25px !important;
+            font-size: 20px !important;
         }
     </style>
 """, unsafe_allow_html=True)
