@@ -1,18 +1,30 @@
 import streamlit as st
 
-st.set_page_config(page_title="Learning Style Survey", page_icon="🧠")
+st.set_page_config(
+    page_title="Learning Style Survey",
+    page_icon="🧠",
+    layout="wide",
+)
 
-# 🔥 문항(문장)과 선택지 글자 크기 증가
 st.markdown("""
     <style>
-        div.row-widget.stRadio > div {
-            font-size: 80px !important;
-        }
-        div.row-widget.stRadio label {
+        /* 문항 텍스트 크기 */
+        .stRadio > label {
             font-size: 40px !important;
+        }
+
+        /* 라디오 선택지 크기 */
+        .stRadio div[role='radiogroup'] label {
+            font-size: 20px !important;
         }
     </style>
 """, unsafe_allow_html=True)
+
+st.title("Learning Style Survey")
+st.write(
+    "이 설문은 학습자가 선호하는 학습 양식을 파악하기 위한 도구입니다. "
+    "각 문항에 대해 평소 자신의 행동에 가장 가까운 항목을 선택해 주세요."
+)
 
 
 st.title("Learning Style Survey")
