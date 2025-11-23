@@ -1,25 +1,19 @@
 import streamlit as st
 
-st.set_page_config(
-    page_title="Learning Style Survey",
-    page_icon="🧠",
-    layout="wide",
-)
+st.set_page_config(page_title="Learning Style Survey", page_icon="🧠")
 
+# 🔥 문항(문장)과 선택지 글자 크기 증가
 st.markdown("""
     <style>
-        /* 문항 텍스트 (라디오 전체 라벨) */
-        .stRadio > label {
-            font-size: 60px !important;
-            font-weight: 600 !important;
+        div.row-widget.stRadio > div {
+            font-size: 30px !important;
         }
-
-        /* 선택지 숫자 (1, 2, 3, 4) */
-        .stRadio div[role='radiogroup'] label {
+        div.row-widget.stRadio label {
             font-size: 20px !important;
         }
     </style>
 """, unsafe_allow_html=True)
+
 
 st.title("Learning Style Survey")
 st.write(
