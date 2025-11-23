@@ -6,6 +6,20 @@ st.set_page_config(
     layout="wide",
 )
 
+st.markdown("""
+    <style>
+        /* 문항 텍스트 크기 */
+        .stRadio > label {
+            font-size: 20px !important;
+        }
+
+        /* 라디오 선택지 크기 */
+        .stRadio div[role='radiogroup'] label {
+            font-size: 18px !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 st.title("Learning Style Survey")
 st.write(
     "이 설문은 학습자가 선호하는 학습 양식을 파악하기 위한 도구입니다. "
