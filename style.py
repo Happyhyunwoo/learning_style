@@ -6,10 +6,10 @@ st.set_page_config(page_title="Learning Style Survey", page_icon="🧠")
 st.markdown("""
     <style>
         div.row-widget.stRadio > div {
-            font-size: 30px !important;
+            font-size: 80px !important;
         }
         div.row-widget.stRadio label {
-            font-size: 20px !important;
+            font-size: 40px !important;
         }
     </style>
 """, unsafe_allow_html=True)
