@@ -1,20 +1,24 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title="Learning Style Survey",
+    page_title="Learning Style Survey (Cohen et al., 2001)",
     page_icon="🧠",
     layout="wide",
 )
 
+# 🔹 문항 텍스트(번호+문장)와 응답 선택지 글자 크기 조정
 st.markdown("""
     <style>
-        /* 문항 텍스트 크기 */
-        .stRadio > label {
-            font-size: 40px !important;
+        /* 문항 번호 + 텍스트 */
+        .question-text {
+            font-size: 22px !important;
+            font-weight: 600 !important;
+            margin-top: 10px !important;
+            margin-bottom: 4px !important;
         }
 
-        /* 라디오 선택지 크기 */
-        .stRadio div[role='radiogroup'] label {
+        /* 라디오 선택지 숫자 (1, 2, 3, 4) */
+        div.row-widget.stRadio label {
             font-size: 20px !important;
         }
     </style>
@@ -25,7 +29,7 @@ st.write(
     "이 설문은 학습자가 선호하는 학습 양식을 파악하기 위한 도구입니다. "
     "각 문항에 대해 평소 자신의 행동에 가장 가까운 항목을 선택해 주세요."
 )
-
+st.caption("1 = Never, 2 = Rarely, 3 = Sometimes, 4 = Often")
 
 ###############################################################################
 # 문항 정의: (문항번호, 문항텍스트, 파트, 그룹)
@@ -157,17 +161,17 @@ items = [
     (97, "I check both grammar and levels of politeness.", "Part 9", "A"),
 
     (98, "Content is more important than grammar.", "Part 9", "B"),
-    (99, "It's hard to focus on communication and grammar at once.", "Part 9", "B"),
-    (100, "Long sentences distract me from grammar.", "Part 9", "B"),
+    (99, "It's a challenge to focus on communication and grammar at once.", "Part 9", "B"),
+    (100, "Long sentences distract me from grammar and style.", "Part 9", "B"),
 
     # Part 10
     (101, "I react quickly in language situations.", "Part 10", "A"),
-    (102, "I go with my instincts.", "Part 10", "A"),
-    (103, "I jump in first and correct later.", "Part 10", "A"),
+    (102, "I go with my instincts in the target language.", "Part 10", "A"),
+    (103, "I jump in, see what happens, and then correct if needed.", "Part 10", "A"),
 
-    (104, "I need to think before speaking or writing.", "Part 10", "B"),
+    (104, "I need to think things through before speaking or writing.", "Part 10", "B"),
     (105, "I like to ‘look before I leap’.", "Part 10", "B"),
-    (106, "I gather supporting material before producing language.", "Part 10", "B"),
+    (106, "I gather supporting material in my mind before producing language.", "Part 10", "B"),
 
     # Part 11
     (107, "Metaphors help me understand language.", "Part 11", "A"),
@@ -218,7 +222,7 @@ style_labels = {
 }
 
 ###############################################################################
-# Streamlit Form
+# 설문 폼
 ###############################################################################
 
 with st.form("survey_form"):
@@ -231,10 +235,18 @@ with st.form("survey_form"):
             current_part = part
 
         key = f"item_{num}"
+
+        # 번호 + 문항 텍스트를 따로 크게 표시
+        st.markdown(
+            f"<div class='question-text'>{num}. {text}</div>",
+            unsafe_allow_html=True
+        )
+
+        # 라디오 버튼: 기본 선택 없음(index=None)
         responses[key] = st.radio(
-            f"{num}. {text}",
+            "응답 선택",
             options=[1, 2, 3, 4],
-            index=None,             # ← 기본 선택 없음
+            index=None,
             horizontal=True,
             key=key
         )
@@ -253,7 +265,7 @@ if submitted:
         value = responses.get(key)
 
         if value is None:
-            st.error(f"{num}번 문항이 선택되지 않았습니다.")
+            st.error(f"{num}번 문항의 응답이 선택되지 않았습니다.")
             st.stop()
 
         part_group_totals.setdefault(part, {}).setdefault(group, 0)
@@ -263,12 +275,13 @@ if submitted:
 
     for part, groups in part_group_totals.items():
         max_score = max(groups.values())
-        best = [g for g, v in groups.items() if v == max_score]
+        best_groups = [g for g, v in groups.items() if v == max_score]
 
         st.markdown(f"#### {part}")
-        st.write(", ".join([f"{g}: {groups[g]}" for g in sorted(groups.keys())]))
+        score_text = ", ".join([f"{g}: {groups[g]}" for g in sorted(groups.keys())])
+        st.write(f"점수: {score_text}")
 
-        for g in best:
+        for g in best_groups:
             label, desc = style_labels.get((part, g), ("Unknown", ""))
             st.write(f"**{label} ({g})** – {desc}")
 
