@@ -10,7 +10,7 @@ st.markdown("""
     <style>
         /* 문항 텍스트 (라디오 전체 라벨) */
         .stRadio > label {
-            font-size: 30px !important;
+            font-size: 60px !important;
             font-weight: 600 !important;
         }
 
